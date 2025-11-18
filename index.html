@@ -1,0 +1,1122 @@
+<!doctype html>
+<html lang="fr">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boîte à Outils du Bricoleur de l'Indisciple</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+      min-height: 100%;
+      overflow-x: hidden;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Navigation */
+    .nav-bar {
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 15px 30px;
+      margin-bottom: 30px;
+      border-radius: 12px;
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    }
+
+    .nav-btn:active {
+      transform: translateY(0);
+    }
+
+    /* Sections */
+    .section {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Page de couverture */
+    .cover-page {
+      background: linear-gradient(135deg, #2897d5 0%, #a3195b 100%);
+      border-radius: 20px;
+      padding: 60px 40px;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover-page::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none"/><path d="M10 10 L20 10 L20 20 L10 20 Z M30 30 L35 30 L35 35 L30 35 Z M60 15 L70 15 L70 25 L60 25 Z" fill="white" opacity="0.05"/></svg>') repeat;
+      opacity: 0.3;
+    }
+
+    .toolbox-icon {
+      font-size: 120px;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+    }
+
+    .cover-title {
+      color: white;
+      font-size: 48px;
+      font-weight: 800;
+      margin: 20px 0;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      line-height: 1.2;
+    }
+
+    .cover-subtitle {
+      color: white;
+      font-size: 28px;
+      font-weight: 400;
+      margin: 15px 0 30px;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    }
+
+    .cover-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.95);
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 18px;
+      margin-top: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    /* Introduction */
+    .intro-page {
+      background: white;
+      border-radius: 20px;
+      padding: 50px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    }
+
+    .intro-title {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 30px;
+      text-align: center;
+      padding-bottom: 20px;
+      border-bottom: 4px solid #f39200;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .intro-card {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      border-radius: 15px;
+      padding: 30px;
+      border-left: 6px solid;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease;
+    }
+
+    .intro-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .intro-card-icon {
+      font-size: 42px;
+      margin-bottom: 15px;
+    }
+
+    .intro-card-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .intro-card-text {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    /* Cartes outils */
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+    }
+
+    .tool-card {
+      background: white;
+      border-radius: 16px;
+      padding: 0;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+      overflow: hidden;
+      transition: all 0.3s ease;
+      border: 3px solid;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 35px rgba(0,0,0,0.18);
+    }
+
+    .card-header {
+      padding: 25px;
+      background: linear-gradient(135deg, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.05) 100%);
+      border-bottom: 3px solid;
+      position: relative;
+    }
+
+    .card-icon {
+      font-size: 56px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .card-title {
+      font-size: 22px;
+      font-weight: 800;
+      margin: 0;
+      line-height: 1.3;
+    }
+
+    .card-body {
+      padding: 25px;
+    }
+
+    .card-scenario {
+      background: #f8f9fa;
+      padding: 18px;
+      border-radius: 10px;
+      margin-bottom: 18px;
+      border-left: 4px solid;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .card-mission {
+      font-weight: 700;
+      margin-bottom: 15px;
+      font-size: 16px;
+      padding: 12px;
+      background: rgba(243, 146, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    .card-questions {
+      margin: 18px 0;
+    }
+
+    .card-question {
+      padding: 10px 10px 10px 30px;
+      margin: 8px 0;
+      font-size: 14px;
+      line-height: 1.5;
+      position: relative;
+    }
+
+    .card-question::before {
+      content: '▸';
+      position: absolute;
+      left: 10px;
+      font-weight: bold;
+    }
+
+    .card-footer {
+      background: linear-gradient(135deg, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.06) 100%);
+      padding: 20px 25px;
+      border-top: 2px dashed #ddd;
+    }
+
+    .card-bonus {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .bonus-badge {
+      background: gold;
+      color: #171718;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
+    }
+
+    /* Grille de restitution */
+    .restitution-page {
+      background: white;
+      border-radius: 20px;
+      padding: 50px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    }
+
+    .restitution-title {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 30px;
+      text-align: center;
+      padding-bottom: 20px;
+      border-bottom: 4px solid #95c11f;
+    }
+
+    .restitution-grid {
+      display: grid;
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .restitution-group {
+      background: #f8f9fa;
+      border-radius: 15px;
+      padding: 25px;
+      border-left: 6px solid;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .group-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .group-title {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .progress-bar-container {
+      background: #e9ecef;
+      border-radius: 20px;
+      height: 30px;
+      width: 200px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #95c11f 0%, #2897d5 100%);
+      border-radius: 20px;
+      transition: width 0.5s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .idea-input {
+      width: 100%;
+      min-height: 120px;
+      padding: 15px;
+      border: 2px solid #dee2e6;
+      border-radius: 10px;
+      font-size: 15px;
+      font-family: inherit;
+      resize: vertical;
+      margin-bottom: 15px;
+    }
+
+    .idea-input:focus {
+      outline: none;
+      border-color: #95c11f;
+      box-shadow: 0 0 0 3px rgba(149, 193, 31, 0.1);
+    }
+
+    .score-display {
+      display: flex;
+      gap: 15px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+    }
+
+    .score-badge {
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    /* Synthèse collective */
+    .synthese-page {
+      background: white;
+      border-radius: 20px;
+      padding: 50px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    }
+
+    .synthese-title {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 30px;
+      text-align: center;
+      padding-bottom: 20px;
+      border-bottom: 4px solid #d60b52;
+    }
+
+    .synthese-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin-top: 30px;
+    }
+
+    .synthese-column {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      border-radius: 15px;
+      padding: 25px;
+      border-top: 6px solid;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      min-height: 300px;
+    }
+
+    .column-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid rgba(0,0,0,0.1);
+    }
+
+    .column-icon {
+      font-size: 36px;
+    }
+
+    .column-title {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .column-content {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #495057;
+    }
+
+    /* Footer */
+    .page-footer {
+      text-align: center;
+      margin-top: 40px;
+      padding: 25px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 15px;
+      }
+
+      .cover-title {
+        font-size: 32px;
+      }
+
+      .cover-subtitle {
+        font-size: 20px;
+      }
+
+      .intro-page, .restitution-page, .synthese-page {
+        padding: 30px 25px;
+      }
+
+      .cards-container {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-bar {
+        padding: 15px;
+      }
+
+      .nav-btn {
+        padding: 10px 18px;
+        font-size: 13px;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="container"><!-- Navigation -->
+   <nav class="nav-bar" id="navigation"><button class="nav-btn" data-page="cover" style="background-color: #2897d5; color: white;">🏠 Couverture</button> <button class="nav-btn" data-page="intro" style="background-color: #95c11f; color: white;">📋 Introduction</button> <button class="nav-btn" data-page="cards" style="background-color: #f39200; color: white;">🛠️ Cartes Outils</button> <button class="nav-btn" data-page="restitution" style="background-color: #a3195b; color: white;">📊 Restitution</button> <button class="nav-btn" data-page="synthese" style="background-color: #d60b52; color: white;">✨ Synthèse</button> <button class="nav-btn" id="shareBtn" style="background-color: #171718; color: white;">🔗 Créer un lien</button>
+   </nav><!-- Modal de partage -->
+   <div id="shareModal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center;">
+    <div style="background: white; padding: 40px; border-radius: 20px; max-width: 700px; width: 90%; box-shadow: 0 10px 40px rgba(0,0,0,0.3); max-height: 90%; overflow-y: auto;">
+     <h2 style="color: #2897d5; margin: 0 0 20px 0; font-size: 28px; font-weight: 700;">🔗 Lien d'Intégration</h2>
+     <div style="background: #f8f9fa; padding: 20px; border-radius: 12px; border-left: 4px solid #2897d5; margin-bottom: 25px;">
+      <p style="margin: 0 0 15px 0; font-size: 15px; color: #333; font-weight: 600;">Code HTML pour intégrer ce Serious Game sur votre site :</p><textarea id="embedCode" readonly style="width: 100%; min-height: 100px; padding: 12px; border: 2px solid #dee2e6; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 13px; background: white; resize: vertical; color: #495057; line-height: 1.5;">&lt;iframe src="https://votre-site-canva.com/embed" width="100%" height="800" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;</textarea> <button id="copyEmbedBtn" style="margin-top: 12px; padding: 10px 20px; background: #2897d5; color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; box-shadow: 0 2px 8px rgba(40, 151, 213, 0.3); transition: all 0.3s ease;"> 📋 Copier le code </button> <span id="copySuccess" style="display: none; margin-left: 12px; color: #95c11f; font-weight: 600; font-size: 14px;">✓ Copié !</span>
+     </div>
+     <div style="background: #fff3e0; padding: 20px; border-radius: 12px; border-left: 4px solid #f39200; margin-bottom: 25px;">
+      <p style="margin: 0 0 10px 0; font-size: 15px; color: #333; line-height: 1.6;"><strong>📌 Comment obtenir votre lien réel :</strong></p>
+      <ol style="margin: 10px 0 0 0; padding-left: 20px; font-size: 14px; color: #495057; line-height: 1.8;">
+       <li>Cliquez sur <strong>"Use in a design"</strong> en haut de cette page</li>
+       <li>Dans l'éditeur Canva, cliquez sur <strong>"Publish website"</strong></li>
+       <li>Copiez l'URL générée par Canva</li>
+       <li>Remplacez <code style="background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">https://votre-site-canva.com/embed</code> dans le code ci-dessus</li>
+      </ol>
+     </div>
+     <div style="background: #f1f8e9; padding: 20px; border-radius: 12px; border-left: 4px solid #95c11f; margin-bottom: 25px;">
+      <p style="margin: 0; font-size: 15px; color: #333; line-height: 1.6;"><strong>💡 Astuce :</strong> Vous pouvez ajuster la hauteur (<code style="background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 4px;">height="800"</code>) selon vos besoins. Recommandé : entre 600px et 1000px.</p>
+     </div><button id="closeModal" style="width: 100%; padding: 15px; background: #95c11f; color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 12px rgba(149, 193, 31, 0.3); transition: all 0.3s ease;"> Fermer </button>
+    </div>
+   </div><!-- Section Couverture -->
+   <div id="cover" class="section active">
+    <div class="cover-page">
+     <div class="toolbox-icon">
+      🧰
+     </div>
+     <h1 class="cover-title" id="coverTitle">La Boîte à Outils du Bricoleur de l'Indisciple</h1>
+     <p class="cover-subtitle" id="coverSubtitle">Construire ensemble les solutions 2026</p>
+     <div class="cover-badge" style="color: #f39200;">
+      Serious Game — Mission Locale 2026
+     </div>
+    </div>
+    <div class="page-footer" id="footerCover" style="color: #171718;">
+     Mission Locale Pays Basque — 2026
+    </div>
+   </div><!-- Section Introduction -->
+   <div id="intro" class="section">
+    <div class="intro-page">
+     <h2 class="intro-title" style="color: #2897d5;">Comment ça marche ?</h2>
+     <div class="intro-grid">
+      <div class="intro-card" style="border-left-color: #f39200;">
+       <div class="intro-card-icon">
+        🎯
+       </div>
+       <h3 class="intro-card-title" style="color: #f39200;">Le but du jeu</h3>
+       <p class="intro-card-text">Produire ensemble des idées <strong>simples et réalistes</strong> pour organiser, mutualiser, simplifier et innover en 2026, dans un contexte de transformation.</p>
+      </div>
+      <div class="intro-card" style="border-left-color: #95c11f;">
+       <div class="intro-card-icon">
+        ⏱️
+       </div>
+       <h3 class="intro-card-title" style="color: #95c11f;">Durée</h3>
+       <p class="intro-card-text" id="introDuration"><strong>1h</strong> de travail collaboratif en groupes, avec un temps de restitution collective pour partager les pistes identifiées.</p>
+      </div>
+      <div class="intro-card" style="border-left-color: #2897d5;">
+       <div class="intro-card-icon">
+        🎲
+       </div>
+       <h3 class="intro-card-title" style="color: #2897d5;">Déroulé</h3>
+       <p class="intro-card-text"><strong>Tirage</strong> d'une carte-outil → <strong>Réflexion</strong> en groupe sur le scénario → <strong>Restitution</strong> des pistes d'action concrètes.</p>
+      </div>
+      <div class="intro-card" style="border-left-color: #a3195b;">
+       <div class="intro-card-icon">
+        💡
+       </div>
+       <h3 class="intro-card-title" style="color: #a3195b;">La règle d'or</h3>
+       <p class="intro-card-text">"<em>Chacun contribue, personne ne représente les autres, toutes les idées sont bienvenues.</em>" Un espace bienveillant pour construire ensemble.</p>
+      </div>
+     </div>
+    </div>
+    <div class="page-footer" id="footerIntro" style="color: #171718;">
+     Mission Locale Pays Basque — 2026
+    </div>
+   </div><!-- Section Cartes Outils -->
+   <div id="cards" class="section">
+    <div class="cards-container"><!-- Carte 1 : Niveau -->
+     <div class="tool-card" style="border-color: #f39200;">
+      <div class="card-header" style="border-bottom-color: #f39200;"><span class="card-icon">📏</span>
+       <h3 class="card-title" style="color: #f39200;">Le Niveau — Équilibrer les priorités</h3>
+      </div>
+      <div class="card-body">
+       <div class="card-scenario" style="border-left-color: #f39200;"><strong>Scénario 2026 :</strong> Baisse de 7 ETP sur la structure. Comment maintenir un équilibre entre les missions essentielles et les nouvelles attentes, sans surcharge ?
+       </div>
+       <div class="card-mission"><strong>Mission :</strong> Identifier 3 leviers pour équilibrer la charge et prioriser les actions à impact maximum.
+       </div>
+       <div class="card-questions">
+        <div class="card-question" style="color: #f39200;">
+         Quelles activités peuvent être simplifiées ou mutualisées ?
+        </div>
+        <div class="card-question" style="color: #f39200;">
+         Quels outils numériques pourraient alléger la charge administrative ?
+        </div>
+        <div class="card-question" style="color: #f39200;">
+         Comment mieux répartir les compétences et expertises existantes ?
+        </div>
+       </div>
+      </div>
+      <div class="card-footer">
+       <div class="card-bonus"><span class="bonus-badge">⭐ Bonus</span> <span>+1 jeton "Priorisation" si l'idée est testable sous 3 mois</span>
+       </div>
+      </div>
+     </div><!-- Carte 2 : Marteau Souple -->
+     <div class="tool-card" style="border-color: #95c11f;">
+      <div class="card-header" style="border-bottom-color: #95c11f;"><span class="card-icon">🔨</span>
+       <h3 class="card-title" style="color: #95c11f;">Le Marteau Souple — S'adapter avec souplesse</h3>
+      </div>
+      <div class="card-body">
+       <div class="card-scenario" style="border-left-color: #95c11f;"><strong>Scénario 2026 :</strong> Hausse de la demande d'accompagnement, avec des profils de plus en plus variés. Comment rester agile et réactif ?
+       </div>
+       <div class="card-mission"><strong>Mission :</strong> Proposer 3 pistes d'adaptation des parcours et modalités d'accompagnement.
+       </div>
+       <div class="card-questions">
+        <div class="card-question" style="color: #95c11f;">
+         Peut-on diversifier les formats (collectifs, distanciel, ateliers courts) ?
+        </div>
+        <div class="card-question" style="color: #95c11f;">
+         Comment capitaliser sur les retours d'expérience des jeunes ?
+        </div>
+        <div class="card-question" style="color: #95c11f;">
+         Quelles alliances avec d'autres acteurs locaux sont possibles ?
+        </div>
+       </div>
+      </div>
+      <div class="card-footer">
+       <div class="card-bonus"><span class="bonus-badge">⭐ Bonus</span> <span>+1 badge "Innovation" si l'idée mobilise un nouveau partenariat</span>
+       </div>
+      </div>
+     </div><!-- Carte 3 : Mètre Pliant -->
+     <div class="tool-card" style="border-color: #2897d5;">
+      <div class="card-header" style="border-bottom-color: #2897d5;"><span class="card-icon">📐</span>
+       <h3 class="card-title" style="color: #2897d5;">Le Mètre Pliant — Mesurer l'impact</h3>
+      </div>
+      <div class="card-body">
+       <div class="card-scenario" style="border-left-color: #2897d5;"><strong>Scénario 2026 :</strong> Besoin de prouver l'impact de nos actions avec des moyens limités. Comment évaluer simplement et efficacement ?
+       </div>
+       <div class="card-mission"><strong>Mission :</strong> Identifier 3 indicateurs simples et pertinents pour valoriser notre action.
+       </div>
+       <div class="card-questions">
+        <div class="card-question" style="color: #2897d5;">
+         Quels indicateurs sont vraiment utiles pour piloter nos actions ?
+        </div>
+        <div class="card-question" style="color: #2897d5;">
+         Comment collecter les données sans alourdir le quotidien ?
+        </div>
+        <div class="card-question" style="color: #2897d5;">
+         Quels outils digitaux peuvent faciliter le suivi ?
+        </div>
+       </div>
+      </div>
+      <div class="card-footer">
+       <div class="card-bonus"><span class="bonus-badge">⭐ Bonus</span> <span>+1 jeton "Efficacité" si l'indicateur est automatisable</span>
+       </div>
+      </div>
+     </div><!-- Carte 4 : Scie Fine -->
+     <div class="tool-card" style="border-color: #d60b52;">
+      <div class="card-header" style="border-bottom-color: #d60b52;"><span class="card-icon">🪚</span>
+       <h3 class="card-title" style="color: #d60b52;">La Scie Fine — Simplifier les process</h3>
+      </div>
+      <div class="card-body">
+       <div class="card-scenario" style="border-left-color: #d60b52;"><strong>Scénario 2026 :</strong> Des processus qui se sont complexifiés avec le temps. Comment couper dans le superflu tout en gardant l'essentiel ?
+       </div>
+       <div class="card-mission"><strong>Mission :</strong> Proposer 3 simplifications concrètes de process internes.
+       </div>
+       <div class="card-questions">
+        <div class="card-question" style="color: #d60b52;">
+         Quelles ����tapes administratives peuvent être supprimées ou fusionnées ?
+        </div>
+        <div class="card-question" style="color: #d60b52;">
+         Quels documents ou réunions sont redondants ?
+        </div>
+        <div class="card-question" style="color: #d60b52;">
+         Comment standardiser sans perdre en personnalisation ?
+        </div>
+       </div>
+      </div>
+      <div class="card-footer">
+       <div class="card-bonus"><span class="bonus-badge">⭐ Bonus</span> <span>+1 jeton "Simplification" si ça libère du temps quotidien</span>
+       </div>
+      </div>
+     </div><!-- Carte 5 : Lampe Frontale -->
+     <div class="tool-card" style="border-color: #a3195b;">
+      <div class="card-header" style="border-bottom-color: #a3195b;"><span class="card-icon">🔦</span>
+       <h3 class="card-title" style="color: #a3195b;">La Lampe Frontale — Éclairer les zones d'ombre</h3>
+      </div>
+      <div class="card-body">
+       <div class="card-scenario" style="border-left-color: #a3195b;"><strong>Scénario 2026 :</strong> Certains publics ou territoires sont moins bien couverts. Comment mieux identifier et toucher ces jeunes ?
+       </div>
+       <div class="card-mission"><strong>Mission :</strong> Identifier 3 leviers pour améliorer la couverture territoriale ou le repérage.
+       </div>
+       <div class="card-questions">
+        <div class="card-question" style="color: #a3195b;">
+         Comment aller vers les jeunes qui ne viennent pas spontanément ?
+        </div>
+        <div class="card-question" style="color: #a3195b;">
+         Quels lieux ou événements pourraient servir de points de contact ?
+        </div>
+        <div class="card-question" style="color: #a3195b;">
+         Comment mobiliser les relais locaux (associations, mairies, etc.) ?
+        </div>
+       </div>
+      </div>
+      <div class="card-footer">
+       <div class="card-bonus"><span class="bonus-badge">⭐ Bonus</span> <span>+1 badge "Proximité" si l'action cible un territoire peu couvert</span>
+       </div>
+      </div>
+     </div><!-- Carte 6 : Crochet -->
+     <div class="tool-card" style="border-color: #9f3d3f;">
+      <div class="card-header" style="border-bottom-color: #9f3d3f;"><span class="card-icon">🪝</span>
+       <h3 class="card-title" style="color: #9f3d3f;">Le Crochet — Créer des liens</h3>
+      </div>
+      <div class="card-body">
+       <div class="card-scenario" style="border-left-color: #9f3d3f;"><strong>Scénario 2026 :</strong> Territoire large, partenaires nombreux. Comment mutualiser et créer des synergies efficaces entre acteurs ?
+       </div>
+       <div class="card-mission"><strong>Mission :</strong> Proposer 3 modalités de mutualisation ou de coopération territoriale.
+       </div>
+       <div class="card-questions">
+        <div class="card-question" style="color: #9f3d3f;">
+         Quelles ressources (locaux, outils, compétences) peuvent être partagées ?
+        </div>
+        <div class="card-question" style="color: #9f3d3f;">
+         Comment améliorer la coordination entre sites ou antennes ?
+        </div>
+        <div class="card-question" style="color: #9f3d3f;">
+         Quels projets communs pourraient voir le jour avec les partenaires ?
+        </div>
+       </div>
+      </div>
+      <div class="card-footer">
+       <div class="card-bonus"><span class="bonus-badge">⭐ Bonus</span> <span>+1 jeton "Coopération" si ça implique plusieurs structures</span>
+       </div>
+      </div>
+     </div><!-- Carte 7 : Fil à Plomb -->
+     <div class="tool-card" style="border-color: #f39200;">
+      <div class="card-header" style="border-bottom-color: #f39200;"><span class="card-icon">⚖️</span>
+       <h3 class="card-title" style="color: #f39200;">Le Fil à Plomb — Garantir la cohérence</h3>
+      </div>
+      <div class="card-body">
+       <div class="card-scenario" style="border-left-color: #f39200;"><strong>Scénario 2026 :</strong> Projets nombreux mais besoin de cohérence globale. Comment assurer une ligne directrice claire tout en laissant place à l'initiative ?
+       </div>
+       <div class="card-mission"><strong>Mission :</strong> Identifier 3 principes ou outils pour harmoniser les pratiques.
+       </div>
+       <div class="card-questions">
+        <div class="card-question" style="color: #f39200;">
+         Quels repères communs peuvent guider l'action de tous ?
+        </div>
+        <div class="card-question" style="color: #f39200;">
+         Comment capitaliser et diffuser les bonnes pratiques internes ?
+        </div>
+        <div class="card-question" style="color: #f39200;">
+         Quels espaces d'échange favorisent l'alignement collectif ?
+        </div>
+       </div>
+      </div>
+      <div class="card-footer">
+       <div class="card-bonus"><span class="bonus-badge">⭐ Bonus</span> <span>+1 badge "Cohérence" si ça renforce la culture commune</span>
+       </div>
+      </div>
+     </div><!-- Carte 8 : Crayon de Charpentier -->
+     <div class="tool-card" style="border-color: #95c11f;">
+      <div class="card-header" style="border-bottom-color: #95c11f;"><span class="card-icon">✏️</span>
+       <h3 class="card-title" style="color: #95c11f;">Le Crayon de Charpentier — Tracer l'avenir</h3>
+      </div>
+      <div class="card-body">
+       <div class="card-scenario" style="border-left-color: #95c11f;"><strong>Scénario 2026 :</strong> Réorganisation interne en cours. Comment dessiner collectivement le fonctionnement de demain ?
+       </div>
+       <div class="card-mission"><strong>Mission :</strong> Proposer 3 idées pour co-construire l'organisation future.
+       </div>
+       <div class="card-questions">
+        <div class="card-question" style="color: #95c11f;">
+         Comment impliquer les équipes dans la définition des rôles et missions ?
+        </div>
+        <div class="card-question" style="color: #95c11f;">
+         Quels espaces de dialogue et de décision collective instaurer ?
+        </div>
+        <div class="card-question" style="color: #95c11f;">
+         Comment expérimenter de nouvelles façons de travailler en sécurité ?
+        </div>
+       </div>
+      </div>
+      <div class="card-footer">
+       <div class="card-bonus"><span class="bonus-badge">⭐ Bonus</span> <span>+1 jeton "Participation" si l'idée favorise l'intelligence collective</span>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="page-footer" id="footerCards" style="color: #171718;">
+     Mission Locale Pays Basque — 2026
+    </div>
+   </div><!-- Section Restitution -->
+   <div id="restitution" class="section">
+    <div class="restitution-page">
+     <h2 class="restitution-title" style="color: #a3195b;">Grille de Restitution Gamifiée</h2>
+     <p style="text-align: center; font-size: 16px; margin-bottom: 30px; color: #495057;">Chaque groupe note ses idées et cumule des points : <strong>1 pt</strong> = idée simple | <strong>2 pts</strong> = idée testable | <strong>3 pts</strong> = idée activable en janvier 2026</p>
+     <div class="restitution-grid"><!-- Groupe 1 -->
+      <div class="restitution-group" style="border-left-color: #f39200;">
+       <div class="group-header">
+        <h3 class="group-title" style="color: #f39200;">🛠️ Groupe 1</h3>
+        <div class="progress-bar-container">
+         <div class="progress-bar" id="progress1" style="width: 0%;">
+          0/3
+         </div>
+        </div>
+       </div><textarea class="idea-input" id="ideas1" placeholder="Notez vos 3 idées ici..." oninput="updateProgress(1)"></textarea>
+       <div class="score-display">
+        <div class="score-badge" style="background: #e3f2fd; color: #2897d5;"><span>💡</span> <span id="score1-simple">0 idée simple</span>
+        </div>
+        <div class="score-badge" style="background: #f1f8e9; color: #95c11f;"><span>🧪</span> <span id="score1-testable">0 idée testable</span>
+        </div>
+        <div class="score-badge" style="background: #fff3e0; color: #f39200;"><span>🚀</span> <span id="score1-activable">0 idée activable</span>
+        </div>
+       </div>
+      </div><!-- Groupe 2 -->
+      <div class="restitution-group" style="border-left-color: #95c11f;">
+       <div class="group-header">
+        <h3 class="group-title" style="color: #95c11f;">🛠️ Groupe 2</h3>
+        <div class="progress-bar-container">
+         <div class="progress-bar" id="progress2" style="width: 0%;">
+          0/3
+         </div>
+        </div>
+       </div><textarea class="idea-input" id="ideas2" placeholder="Notez vos 3 idées ici..." oninput="updateProgress(2)"></textarea>
+       <div class="score-display">
+        <div class="score-badge" style="background: #e3f2fd; color: #2897d5;"><span>💡</span> <span id="score2-simple">0 idée simple</span>
+        </div>
+        <div class="score-badge" style="background: #f1f8e9; color: #95c11f;"><span>🧪</span> <span id="score2-testable">0 idée testable</span>
+        </div>
+        <div class="score-badge" style="background: #fff3e0; color: #f39200;"><span>🚀</span> <span id="score2-activable">0 idée activable</span>
+        </div>
+       </div>
+      </div><!-- Groupe 3 -->
+      <div class="restitution-group" style="border-left-color: #2897d5;">
+       <div class="group-header">
+        <h3 class="group-title" style="color: #2897d5;">🛠️ Groupe 3</h3>
+        <div class="progress-bar-container">
+         <div class="progress-bar" id="progress3" style="width: 0%;">
+          0/3
+         </div>
+        </div>
+       </div><textarea class="idea-input" id="ideas3" placeholder="Notez vos 3 idées ici..." oninput="updateProgress(3)"></textarea>
+       <div class="score-display">
+        <div class="score-badge" style="background: #e3f2fd; color: #2897d5;"><span>💡</span> <span id="score3-simple">0 idée simple</span>
+        </div>
+        <div class="score-badge" style="background: #f1f8e9; color: #95c11f;"><span>🧪</span> <span id="score3-testable">0 idée testable</span>
+        </div>
+        <div class="score-badge" style="background: #fff3e0; color: #f39200;"><span>���</span> <span id="score3-activable">0 idée activable</span>
+        </div>
+       </div>
+      </div><!-- Groupe 4 -->
+      <div class="restitution-group" style="border-left-color: #d60b52;">
+       <div class="group-header">
+        <h3 class="group-title" style="color: #d60b52;">🛠️ Groupe 4</h3>
+        <div class="progress-bar-container">
+         <div class="progress-bar" id="progress4" style="width: 0%;">
+          0/3
+         </div>
+        </div>
+       </div><textarea class="idea-input" id="ideas4" placeholder="Notez vos 3 idées ici..." oninput="updateProgress(4)"></textarea>
+       <div class="score-display">
+        <div class="score-badge" style="background: #e3f2fd; color: #2897d5;"><span>💡</span> <span id="score4-simple">0 idée simple</span>
+        </div>
+        <div class="score-badge" style="background: #f1f8e9; color: #95c11f;"><span>🧪</span> <span id="score4-testable">0 idée testable</span>
+        </div>
+        <div class="score-badge" style="background: #fff3e0; color: #f39200;"><span>🚀</span> <span id="score4-activable">0 idée activable</span>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="page-footer" id="footerRestitution" style="color: #171718;">
+     Mission Locale Pays Basque — 2026
+    </div>
+   </div><!-- Section Synthèse -->
+   <div id="synthese" class="section">
+    <div class="synthese-page">
+     <h2 class="synthese-title" style="color: #d60b52;">Synthèse Collective — Les 4 piliers 2026</h2>
+     <p style="text-align: center; font-size: 16px; margin-bottom: 30px; color: #495057;">Toutes les idées des groupes sont triées ici pour construire notre feuille de route commune</p>
+     <div class="synthese-grid"><!-- Colonne Simplifier -->
+      <div class="synthese-column" style="border-top-color: #f39200;">
+       <div class="column-header"><span class="column-icon">✂️</span>
+        <h3 class="column-title" style="color: #f39200;">Simplifier</h3>
+       </div>
+       <div class="column-content">
+        <p><strong>Objectif :</strong> Alléger les processus, supprimer le superflu, automatiser ce qui peut l'être.</p>
+        <p style="margin-top: 15px;"><em>Les idées des groupes qui simplifient le quotidien seront listées ici lors de la restitution collective.</em></p>
+        <ul style="margin-top: 15px; padding-left: 20px;">
+         <li>Réduire les doublons administratifs</li>
+         <li>Standardiser les procédures courantes</li>
+         <li>Digitaliser les suivis répétitifs</li>
+        </ul>
+       </div>
+      </div><!-- Colonne Réorganiser -->
+      <div class="synthese-column" style="border-top-color: #95c11f;">
+       <div class="column-header"><span class="column-icon">🔄</span>
+        <h3 class="column-title" style="color: #95c11f;">Réorganiser</h3>
+       </div>
+       <div class="column-content">
+        <p><strong>Objectif :</strong> Repenser les rôles, ajuster les équipes, améliorer la circulation de l'information.</p>
+        <p style="margin-top: 15px;"><em>Les idées des groupes qui réorganisent les pratiques seront listées ici lors de la restitution collective.</em></p>
+        <ul style="margin-top: 15px; padding-left: 20px;">
+         <li>Clarifier les missions de chacun</li>
+         <li>Optimiser les circuits de décision</li>
+         <li>Renforcer la transversalité</li>
+        </ul>
+       </div>
+      </div><!-- Colonne Mutualiser -->
+      <div class="synthese-column" style="border-top-color: #2897d5;">
+       <div class="column-header"><span class="column-icon">🤝</span>
+        <h3 class="column-title" style="color: #2897d5;">Mutualiser</h3>
+       </div>
+       <div class="column-content">
+        <p><strong>Objectif :</strong> Partager les ressources, créer des synergies territoriales, coopérer avec les partenaires.</p>
+        <p style="margin-top: 15px;"><em>Les idées des groupes qui mutualisent les moyens seront listées ici lors de la restitution collective.</em></p>
+        <ul style="margin-top: 15px; padding-left: 20px;">
+         <li>Partager locaux et équipements</li>
+         <li>Co-construire avec les partenaires</li>
+         <li>Harmoniser entre sites/antennes</li>
+        </ul>
+       </div>
+      </div><!-- Colonne Innover -->
+      <div class="synthese-column" style="border-top-color: #a3195b;">
+       <div class="column-header"><span class="column-icon">💡</span>
+        <h3 class="column-title" style="color: #a3195b;">Innover</h3>
+       </div>
+       <div class="column-content">
+        <p><strong>Objectif :</strong> Tester de nouvelles approches, expérimenter des formats différents, oser le changement.</p>
+        <p style="margin-top: 15px;"><em>Les idées des groupes qui innovent dans les pratiques seront listées ici lors de la restitution collective.</em></p>
+        <ul style="margin-top: 15px; padding-left: 20px;">
+         <li>Expérimenter de nouveaux formats</li>
+         <li>Utiliser le numérique autrement</li>
+         <li>Créer des alliances inédites</li>
+        </ul>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="page-footer" id="footerSynthese" style="color: #171718;">
+     Mission Locale Pays Basque — 2026
+    </div>
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      main_title: "La Boîte à Outils du Bricoleur de l'Indisciple",
+      subtitle: "Construire ensemble les solutions 2026",
+      intro_duration: "1h",
+      footer_text: "Mission Locale Pays Basque — 2026",
+      primary_color: "#2897d5",
+      secondary_color: "#f39200",
+      text_color: "#171718",
+      accent_color: "#95c11f",
+      highlight_color: "#d60b52"
+    };
+
+    async function onConfigChange(config) {
+      const mainTitle = config.main_title || defaultConfig.main_title;
+      const subtitle = config.subtitle || defaultConfig.subtitle;
+      const introDuration = config.intro_duration || defaultConfig.intro_duration;
+      const footerText = config.footer_text || defaultConfig.footer_text;
+      const primaryColor = config.primary_color || defaultConfig.primary_color;
+      const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
+      const textColor = config.text_color || defaultConfig.text_color;
+      const accentColor = config.accent_color || defaultConfig.accent_color;
+      const highlightColor = config.highlight_color || defaultConfig.highlight_color;
+
+      document.getElementById('coverTitle').textContent = mainTitle;
+      document.getElementById('coverSubtitle').textContent = subtitle;
+      document.getElementById('introDuration').innerHTML = `<strong>${introDuration}</strong> de travail collaboratif en groupes, avec un temps de restitution collective pour partager les pistes identifiées.`;
+      
+      const footers = ['footerCover', 'footerIntro', 'footerCards', 'footerRestitution', 'footerSynthese'];
+      footers.forEach(id => {
+        const footer = document.getElementById(id);
+        if (footer) {
+          footer.textContent = footerText;
+          footer.style.color = textColor;
+        }
+      });
+
+      document.querySelectorAll('.nav-btn').forEach((btn, index) => {
+        const colors = [primaryColor, accentColor, secondaryColor, highlightColor, '#d60b52'];
+        btn.style.backgroundColor = colors[index % colors.length];
+      });
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.primary_color || defaultConfig.primary_color,
+              set: (value) => {
+                config.primary_color = value;
+                window.elementSdk.setConfig({ primary_color: value });
+              }
+            },
+            {
+              get: () => config.secondary_color || defaultConfig.secondary_color,
+              set: (value) => {
+                config.secondary_color = value;
+                window.elementSdk.setConfig({ secondary_color: value });
+              }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => {
+                config.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            },
+            {
+              get: () => config.accent_color || defaultConfig.accent_color,
+              set: (value) => {
+                config.accent_color = value;
+                window.elementSdk.setConfig({ accent_color: value });
+              }
+            },
+            {
+              get: () => config.highlight_color || defaultConfig.highlight_color,
+              set: (value) => {
+                config.highlight_color = value;
+                window.elementSdk.setConfig({ highlight_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["main_title", config.main_title || defaultConfig.main_title],
+          ["subtitle", config.subtitle || defaultConfig.subtitle],
+          ["intro_duration", config.intro_duration || defaultConfig.intro_duration],
+          ["footer_text", config.footer_text || defaultConfig.footer_text]
+        ])
+      });
+    }
+
+    // Navigation entre les pages
+    const navButtons = document.querySelectorAll('.nav-btn');
+    const sections = document.querySelectorAll('.section');
+
+    navButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetPage = btn.dataset.page;
+        
+        sections.forEach(section => {
+          section.classList.remove('active');
+        });
+        
+        document.getElementById(targetPage).classList.add('active');
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    // Gestion de la progression
+    function updateProgress(groupNum) {
+      const textarea = document.getElementById(`ideas${groupNum}`);
+      const text = textarea.value.trim();
+      const lines = text.split('\n').filter(line => line.trim().length > 0);
+      const count = Math.min(lines.length, 3);
+      const percentage = (count / 3) * 100;
+      
+      const progressBar = document.getElementById(`progress${groupNum}`);
+      progressBar.style.width = `${percentage}%`;
+      progressBar.textContent = `${count}/3`;
+      
+      document.getElementById(`score${groupNum}-simple`).textContent = `${Math.min(count, 1)} idée simple`;
+      document.getElementById(`score${groupNum}-testable`).textContent = `${Math.min(Math.max(count - 1, 0), 1)} idée testable`;
+      document.getElementById(`score${groupNum}-activable`).textContent = `${Math.max(count - 2, 0)} idée activable`;
+    }
+
+    // Gestion du modal de partage
+    const shareBtn = document.getElementById('shareBtn');
+    const shareModal = document.getElementById('shareModal');
+    const closeModal = document.getElementById('closeModal');
+    const copyEmbedBtn = document.getElementById('copyEmbedBtn');
+    const embedCode = document.getElementById('embedCode');
+    const copySuccess = document.getElementById('copySuccess');
+
+    shareBtn.addEventListener('click', () => {
+      shareModal.style.display = 'flex';
+    });
+
+    closeModal.addEventListener('click', () => {
+      shareModal.style.display = 'none';
+      copySuccess.style.display = 'none';
+    });
+
+    shareModal.addEventListener('click', (e) => {
+      if (e.target === shareModal) {
+        shareModal.style.display = 'none';
+        copySuccess.style.display = 'none';
+      }
+    });
+
+    copyEmbedBtn.addEventListener('click', () => {
+      embedCode.select();
+      embedCode.setSelectionRange(0, 99999);
+      
+      navigator.clipboard.writeText(embedCode.value).then(() => {
+        copySuccess.style.display = 'inline';
+        setTimeout(() => {
+          copySuccess.style.display = 'none';
+        }, 3000);
+      }).catch(() => {
+        document.execCommand('copy');
+        copySuccess.style.display = 'inline';
+        setTimeout(() => {
+          copySuccess.style.display = 'none';
+        }, 3000);
+      });
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a07766b95409f01',t:'MTc2MzQ2ODg1My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

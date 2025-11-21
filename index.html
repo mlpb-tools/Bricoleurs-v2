@@ -681,6 +681,26 @@
         font-size: 13px;
       }
     }
+
+    /* Styles pour l'impression */
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #printArea, #printArea * {
+        visibility: visible;
+      }
+      #printArea {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        padding: 20px;
+      }
+      .nav-bar, .footer-bar, .no-print {
+        display: none !important;
+      }
+    }
   </style>
  </head>
  <body>
@@ -927,7 +947,7 @@
   <rect x="8" y="28" width="10" height="8" rx="1" fill="#e65100" opacity="0.3"/>
   <rect x="46" y="28" width="10" height="8" rx="1" fill="#e65100" opacity="0.3"/>
 </svg>
-       <h3 class="card-title" style="color: #f39200;">Le Niveau — Équilibrer les priorités</h3>
+       <h3 class="card-title" style="color: #f39200;"><span style="background: #f39200; color: white; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; margin-right: 10px;">1</span>Le Niveau — Équilibrer les priorités</h3>
        <p style="font-style: italic; font-size: 13px; color: #666; margin-top: 10px;">Comme le niveau du maçon qui détecte le moindre déséquilibre, il s'agit de trouver le juste équilibre entre nos missions pour éviter que la charge ne penche trop d'un côté.</p>
       </div>
       <div class="card-body">
@@ -949,7 +969,7 @@
      <div class="tool-card" style="border-color: #95c11f;">
       <div class="card-header" style="border-bottom-color: #95c11f;">
        <span class="card-icon">🔨</span>
-       <h3 class="card-title" style="color: #95c11f;">Le Marteau Souple — S'adapter avec souplesse</h3>
+       <h3 class="card-title" style="color: #95c11f;"><span style="background: #95c11f; color: white; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; margin-right: 10px;">2</span>Le Marteau Souple — S'adapter avec souplesse</h3>
        <p style="font-style: italic; font-size: 13px; color: #666; margin-top: 10px;">Le maillet du sculpteur sait doser sa force selon le matériau : comme lui, nous devons adapter nos modalités d'accompagnement à la diversité des profils.</p>
       </div>
       <div class="card-body">
@@ -972,7 +992,7 @@
       <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('metre-pliant-bg.png'); background-size: cover; background-position: center; opacity: 0.15; z-index: 0;"></div>
       <div class="card-header" style="border-bottom-color: #2897d5; position: relative; z-index: 1; background: rgba(255,255,255,0.9);">
        <span class="card-icon">📐</span>
-       <h3 class="card-title" style="color: #2897d5;">Le Mètre Pliant — Mesurer l'impact</h3>
+       <h3 class="card-title" style="color: #2897d5;"><span style="background: #2897d5; color: white; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; margin-right: 10px;">3</span>Le Mètre Pliant — Mesurer l'impact</h3>
        <p style="font-style: italic; font-size: 13px; color: #666; margin-top: 10px;">Compact et précis, le mètre pliant permet de prendre la mesure exacte : à nous de trouver les bons indicateurs pour valoriser notre action sans alourdir le quotidien.</p>
       </div>
       <div class="card-body" style="position: relative; z-index: 1; background: rgba(255,255,255,0.9);">
@@ -994,7 +1014,7 @@
      <div class="tool-card" style="border-color: #d60b52;">
       <div class="card-header" style="border-bottom-color: #d60b52;">
        <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 64 64" style="display: block; margin-bottom: 12px;"><rect x="5" y="28" width="40" height="8" rx="2" fill="#d60b52"/><polygon points="8,36 8,42 12,36" fill="#d60b52"/><polygon points="14,36 14,42 18,36" fill="#d60b52"/><polygon points="20,36 20,42 24,36" fill="#d60b52"/><polygon points="26,36 26,42 30,36" fill="#d60b52"/><polygon points="32,36 32,42 36,36" fill="#d60b52"/><polygon points="38,36 38,42 42,36" fill="#d60b52"/><rect x="42" y="24" width="16" height="16" rx="3" fill="#8B4513"/><rect x="44" y="26" width="12" height="12" rx="2" fill="#A0522D"/></svg>
-       <h3 class="card-title" style="color: #d60b52;">La Scie Fine — Simplifier les process</h3>
+       <h3 class="card-title" style="color: #d60b52;"><span style="background: #d60b52; color: white; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; margin-right: 10px;">4</span>La Scie Fine — Simplifier les process</h3>
        <p style="font-style: italic; font-size: 13px; color: #666; margin-top: 10px;">La scie fine du menuisier coupe avec précision sans abîmer l'ensemble : elle nous invite à supprimer le superflu tout en préservant l'essentiel.</p>
       </div>
       <div class="card-body">
@@ -1016,7 +1036,7 @@
      <div class="tool-card" style="border-color: #a3195b;">
       <div class="card-header" style="border-bottom-color: #a3195b;">
        <span class="card-icon">🔦</span>
-       <h3 class="card-title" style="color: #a3195b;">La Lampe Frontale — Éclairer les zones d'ombre</h3>
+       <h3 class="card-title" style="color: #a3195b;"><span style="background: #a3195b; color: white; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; margin-right: 10px;">5</span>La Lampe Frontale — Éclairer les zones d'ombre</h3>
        <p style="font-style: italic; font-size: 13px; color: #666; margin-top: 10px;">La lampe frontale guide le travailleur dans les recoins sombres : elle symbolise notre capacité à repérer et rejoindre les publics les moins visibles.</p>
       </div>
       <div class="card-body">
@@ -1038,7 +1058,7 @@
      <div class="tool-card" style="border-color: #9f3d3f;">
       <div class="card-header" style="border-bottom-color: #9f3d3f;">
        <span class="card-icon">🔗</span>
-       <h3 class="card-title" style="color: #9f3d3f;">Le Crochet — Créer des liens</h3>
+       <h3 class="card-title" style="color: #9f3d3f;"><span style="background: #9f3d3f; color: white; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; margin-right: 10px;">6</span>Le Crochet — Créer des liens</h3>
        <p style="font-style: italic; font-size: 13px; color: #666; margin-top: 10px;">Le crochet relie, suspend, accroche : il représente notre mission de créer des connexions durables entre acteurs du territoire.</p>
       </div>
       <div class="card-body">
@@ -1073,7 +1093,7 @@
   <!-- Anneau en haut -->
   <circle cx="32" cy="10" r="3" fill="none" stroke="#666" stroke-width="2"/>
 </svg>
-       <h3 class="card-title" style="color: #f39200;">Le Fil à Plomb — Garantir la cohérence</h3>
+       <h3 class="card-title" style="color: #f39200;"><span style="background: #f39200; color: white; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; margin-right: 10px;">7</span>Le Fil à Plomb — Garantir la cohérence</h3>
        <p style="font-style: italic; font-size: 13px; color: #666; margin-top: 10px;">Immuable et fiable, le fil à plomb assure la verticalité parfaite : il nous rappelle l'importance d'une ligne directrice claire pour guider nos actions.</p>
       </div>
       <div class="card-body">
@@ -1095,7 +1115,7 @@
      <div class="tool-card" style="border-color: #95c11f;">
       <div class="card-header" style="border-bottom-color: #95c11f;">
        <span class="card-icon">✏️</span>
-       <h3 class="card-title" style="color: #95c11f;">Le Crayon de Charpentier — Tracer l'avenir</h3>
+       <h3 class="card-title" style="color: #95c11f;"><span style="background: #95c11f; color: white; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; margin-right: 10px;">8</span>Le Crayon de Charpentier — Tracer l'avenir</h3>
        <p style="font-style: italic; font-size: 13px; color: #666; margin-top: 10px;">Avant de construire, le charpentier trace ses repères : comme lui, nous devons dessiner ensemble les contours de notre organisation de demain.</p>
       </div>
       <div class="card-body">
@@ -1123,6 +1143,14 @@
    <div id="restitution" class="section">
     <div class="restitution-page">
      <h2 class="restitution-title" style="color: #a3195b;">FICHE GROUPE — Jeu</h2>
+     
+     <!-- Bouton téléchargement PDF -->
+     <div style="text-align: center; margin-bottom: 25px;">
+      <button onclick="downloadPDF()" style="padding: 14px 30px; background: linear-gradient(135deg, #a3195b, #d60b52); color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 15px rgba(163,25,91,0.3); display: inline-flex; align-items: center; gap: 10px;">
+       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+       Télécharger la fiche en PDF
+      </button>
+     </div>
      
      <!-- Consignes -->
      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 30px;">
@@ -1231,11 +1259,7 @@
 ………………………………………………………………………………………………"></textarea>
      </div>
 
-     <!-- Citation finale -->
-     <div style="background: linear-gradient(135deg, #2897d5 0%, #a3195b 100%); color: white; padding: 30px; border-radius: 15px; text-align: center; margin-top: 30px;">
-      <p style="font-size: 18px; margin: 0 0 10px 0;">🧠 <strong>À garder en tête — Philippe Labbé</strong></p>
-      <p style="font-size: 20px; font-style: italic; margin: 0; line-height: 1.6;">« Le métier se joue dans l'indicible :<br>ce qu'on ne peut pas normer,<br>mais qu'il faut bien faire tenir. »</p>
-     </div>
+
 
     </div>
     <div class="page-footer">
@@ -1342,94 +1366,136 @@
     </div>
   </div>
 
+  <!-- Zone d'impression cachée -->
+  <div id="printArea" style="display: none;">
+    <div style="font-family: Arial, sans-serif; padding: 40px; max-width: 800px; margin: 0 auto;">
+      <h1 style="color: #a3195b; border-bottom: 3px solid #a3195b; padding-bottom: 10px;">FICHE GROUPE</h1>
+      <div id="printInfo" style="background: #f0f0f0; padding: 15px; margin-bottom: 20px;"></div>
+      <div id="printSection1" style="margin: 25px 0; padding: 20px; border-left: 4px solid #a3195b; background: #fafafa;"></div>
+      <div id="printSection2" style="margin: 25px 0; padding: 20px; border-left: 4px solid #a3195b; background: #fafafa;"></div>
+      <div id="printSection3" style="margin: 25px 0; padding: 20px; border-left: 4px solid #a3195b; background: #fafafa;"></div>
+      <div id="printSection4" style="margin: 25px 0; padding: 20px; border-left: 4px solid #a3195b; background: #fafafa;"></div>
+      <div id="printSection5" style="margin: 25px 0; padding: 20px; border-left: 4px solid #a3195b; background: #fafafa;"></div>
+      <div style="margin-top: 40px; text-align: center; color: #666;">Mission Locale Pays Basque - La Boite a Outils du Bricoleur de l Indicible</div>
+    </div>
+  </div>
+
   <script>
-    // Navigation entre les pages
-    const navButtons = document.querySelectorAll('.nav-btn');
-    const sections = document.querySelectorAll('.section');
-
-    // Code d'accès pour l'onglet Synthèse
-    const ACCESS_CODE = "2826";
-    let syntheseUnlocked = false;
-
-    // Éléments du modal
-    const accessModal = document.getElementById('accessModal');
-    const accessCodeInput = document.getElementById('accessCodeInput');
-    const confirmAccessBtn = document.getElementById('confirmAccessBtn');
-    const cancelAccessBtn = document.getElementById('cancelAccessBtn');
-    const accessError = document.getElementById('accessError');
-
-    // Fonction pour ouvrir le modal
-    function openAccessModal() {
-      accessModal.style.display = 'flex';
-      accessCodeInput.value = '';
-      accessError.style.display = 'none';
-      accessCodeInput.focus();
+    // Fonction de téléchargement PDF
+    function downloadPDF() {
+      // Collecter les données du formulaire
+      var sujetInput = document.querySelector('input[placeholder="______________________________"]');
+      var groupeInput = document.querySelector('input[placeholder="_______"]');
+      var sujet = (sujetInput && sujetInput.value) ? sujetInput.value : "Non renseigne";
+      var groupe = (groupeInput && groupeInput.value) ? groupeInput.value : "Non renseigne";
+      
+      // Récupérer les contenus des textareas
+      var allTextareas = document.querySelectorAll('#restitution textarea');
+      var section1 = allTextareas[0] ? allTextareas[0].value : "Non renseigne";
+      var section2 = allTextareas[1] ? allTextareas[1].value : "Non renseigne";
+      var section3 = allTextareas[2] ? allTextareas[2].value : "Non renseigne";
+      var section4 = allTextareas[3] ? allTextareas[3].value : "Non renseigne";
+      var section5 = allTextareas[4] ? allTextareas[4].value : "Non renseigne";
+      
+      // Remplir la zone d'impression
+      document.getElementById('printInfo').innerHTML = '<strong>Sujet / outil :</strong> ' + sujet + '<br><strong>Groupe n° :</strong> ' + groupe;
+      document.getElementById('printSection1').innerHTML = '<h3 style="margin-top:0;color:#333;">1 - Ce que l on voit aujourd hui clairement</h3><div style="white-space:pre-wrap;line-height:1.6;">' + section1 + '</div>';
+      document.getElementById('printSection2').innerHTML = '<h3 style="margin-top:0;color:#333;">2 - Ce que cela pose comme difficulte</h3><div style="white-space:pre-wrap;line-height:1.6;">' + section2 + '</div>';
+      document.getElementById('printSection3').innerHTML = '<h3 style="margin-top:0;color:#333;">3 - Ce que l on pourrait ajuster</h3><div style="white-space:pre-wrap;line-height:1.6;">' + section3 + '</div>';
+      document.getElementById('printSection4').innerHTML = '<h3 style="margin-top:0;color:#333;">4 - Une action testable pour 2026</h3><div style="white-space:pre-wrap;line-height:1.6;">' + section4 + '</div>';
+      document.getElementById('printSection5').innerHTML = '<h3 style="margin-top:0;color:#333;">5 - Restitution libre</h3><div style="white-space:pre-wrap;line-height:1.6;">' + section5 + '</div>';
+      
+      // Afficher la zone d'impression
+      document.getElementById('printArea').style.display = 'block';
+      
+      // Lancer l'impression
+      window.print();
+      
+      // Cacher la zone d'impression après
+      setTimeout(function() {
+        document.getElementById('printArea').style.display = 'none';
+      }, 1000);
     }
 
-    // Fonction pour fermer le modal
-    function closeAccessModal() {
-      accessModal.style.display = 'none';
-    }
+    // Attendre que le DOM soit chargé
+    document.addEventListener('DOMContentLoaded', function() {
+      // Navigation entre les pages
+      var navButtons = document.querySelectorAll('.nav-btn');
+      var sections = document.querySelectorAll('.section');
 
-    // Validation du code
-    function validateCode() {
-      if (accessCodeInput.value === ACCESS_CODE) {
-        syntheseUnlocked = true;
-        closeAccessModal();
-        sections.forEach(section => section.classList.remove('active'));
-        document.getElementById('synthese').classList.add('active');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        accessError.style.display = 'block';
+      // Code d'accès pour l'onglet Synthèse
+      var ACCESS_CODE = "2826";
+      var syntheseUnlocked = false;
+
+      // Éléments du modal
+      var accessModal = document.getElementById('accessModal');
+      var accessCodeInput = document.getElementById('accessCodeInput');
+      var confirmAccessBtn = document.getElementById('confirmAccessBtn');
+      var cancelAccessBtn = document.getElementById('cancelAccessBtn');
+      var accessError = document.getElementById('accessError');
+
+      // Vérifier que les éléments existent
+      if (!accessModal || !accessCodeInput || !confirmAccessBtn || !cancelAccessBtn || !accessError) {
+        console.log('Modal elements not found');
+        return;
+      }
+
+      // Fonction pour ouvrir le modal
+      function openAccessModal() {
+        accessModal.style.display = 'flex';
         accessCodeInput.value = '';
+        accessError.style.display = 'none';
         accessCodeInput.focus();
       }
-    }
 
-    // Event listeners pour le modal
-    confirmAccessBtn.addEventListener('click', validateCode);
-    cancelAccessBtn.addEventListener('click', closeAccessModal);
-    accessCodeInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') validateCode();
-    });
+      // Fonction pour fermer le modal
+      function closeAccessModal() {
+        accessModal.style.display = 'none';
+      }
 
-    // Navigation entre les pages avec verrouillage
-    navButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const targetPage = btn.dataset.page;
-        
-        // Vérifier si c'est l'onglet Synthèse et s'il est verrouillé
-        if (targetPage === 'synthese' && !syntheseUnlocked) {
-          openAccessModal();
-          return;
+      // Validation du code
+      function validateCode() {
+        if (accessCodeInput.value === ACCESS_CODE) {
+          syntheseUnlocked = true;
+          closeAccessModal();
+          sections.forEach(function(section) { section.classList.remove('active'); });
+          document.getElementById('synthese').classList.add('active');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          accessError.style.display = 'block';
+          accessCodeInput.value = '';
+          accessCodeInput.focus();
         }
-        
-        sections.forEach(section => {
-          section.classList.remove('active');
+      }
+
+      // Event listeners pour le modal
+      confirmAccessBtn.addEventListener('click', validateCode);
+      cancelAccessBtn.addEventListener('click', closeAccessModal);
+      accessCodeInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') validateCode();
+      });
+
+      // Navigation entre les pages avec verrouillage
+      navButtons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var targetPage = btn.dataset.page;
+          
+          // Vérifier si c'est l'onglet Synthèse et s'il est verrouillé
+          if (targetPage === 'synthese' && !syntheseUnlocked) {
+            openAccessModal();
+            return;
+          }
+          
+          sections.forEach(function(section) {
+            section.classList.remove('active');
+          });
+          
+          document.getElementById(targetPage).classList.add('active');
+          
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         });
-        
-        document.getElementById(targetPage).classList.add('active');
-        
-        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     });
-
-    // Gestion de la progression
-    function updateProgress(groupNum) {
-      const textarea = document.getElementById(`ideas${groupNum}`);
-      const text = textarea.value.trim();
-      const lines = text.split('\n').filter(line => line.trim().length > 0);
-      const count = Math.min(lines.length, 3);
-      const percentage = (count / 3) * 100;
-      
-      const progressBar = document.getElementById(`progress${groupNum}`);
-      progressBar.style.width = `${percentage}%`;
-      progressBar.textContent = `${count}/3`;
-      
-      document.getElementById(`score${groupNum}-simple`).textContent = `${Math.min(count, 1)} idée simple`;
-      document.getElementById(`score${groupNum}-testable`).textContent = `${Math.min(Math.max(count - 1, 0), 1)} idée testable`;
-      document.getElementById(`score${groupNum}-activable`).textContent = `${Math.max(count - 2, 0)} idée activable`;
-    }
   </script>
  </body>
 </html>
